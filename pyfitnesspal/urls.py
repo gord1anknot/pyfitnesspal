@@ -14,8 +14,8 @@
 
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from main import diary_views, food_views
-import main
 
 admin.autodiscover()
 urlpatterns = patterns(
@@ -35,26 +35,34 @@ urlpatterns += patterns(
 urlpatterns += patterns(
     'main.food_views',
 
-    url(r'^foods/$', food_views.IndexView.as_view(),
+    url(r'^foods/$',
+        login_required(food_views.IndexView.as_view()),
         name='pyfitnesspal_food_list_all'),
-    url(r'^foods/(?P<pk>\d+)/$', food_views.DetailView.as_view(),
+    url(r'^foods/(?P<pk>\d+)/$',
+        login_required(food_views.DetailView.as_view()),
         name='pyfitnesspal_food_detail'),
-    url(r'^foods/create$', food_views.CreateView.as_view(),
+    url(r'^foods/create$',
+        login_required(food_views.CreateView.as_view()),
         name='pyfitnesspal_food_create'),
-    url(r'^foods/(?P<pk>\d+)/edit$', food_views.UpdateView.as_view(),
+    url(r'^foods/(?P<pk>\d+)/edit$',
+        login_required(food_views.UpdateView.as_view()),
         name='pyfitnesspal_food_update'),
 )
 
 urlpatterns += patterns(
     'main.diary_views',
 
-    url(r'^diary/$', diary_views.IndexView.as_view(),
+    url(r'^diary/$',
+        login_required(diary_views.IndexView.as_view()),
         name='pyfitnesspal_diary_list_all'),
-    url(r'^diary/(?P<pk>\d+)/$', diary_views.DetailView.as_view(),
+    url(r'^diary/(?P<pk>\d+)/$',
+        login_required(diary_views.DetailView.as_view()),
         name='pyfitnesspal_diary_detail'),
-    url(r'^diary/create$', diary_views.CreateView.as_view(),
+    url(r'^diary/create$',
+        login_required(diary_views.CreateView.as_view()),
         name='pyfitnesspal_diary_create'),
-    url(r'^diary/(?P<pk>\d+)/edit$', diary_views.UpdateView.as_view(),
+    url(r'^diary/(?P<pk>\d+)/edit$',
+        login_required(diary_views.UpdateView.as_view()),
         name='pyfitnesspal_diary_update'),
 )
 

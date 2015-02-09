@@ -4,6 +4,14 @@
   "repository": "https://gord1anknot.github.io/pyfitnesspal",
   "keywords": ["python", "django", "journal", "diary", "nutrition", "fitness"],
   "env": {
+    "PYFITNESSPAL_USERNAME": {
+      "description": "The app has a single, default user - you. Your username will be set using this field.",
+      "value": "demo"
+    },
+    "PYFITNESSPAL_PASSWORD": {
+      "description": "The app has a single, default user - you. Your default password will be set using this field.",
+      "value": "Passw0rd!"
+    },
     "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-python",
     "WEB_CONCURRENCY": {
       "description": "The number of processes to run.",

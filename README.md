@@ -27,7 +27,7 @@ You can deploy directly to Heroku with the button below.
 
 After deploying, run the Django `migrate` command to initialize your postgres database, and run the Django `syncdb` command to set up the root administrator account:
 
-```
+```sh
 $ heroku clone -a new-app-name
 $ heroku run python manage.py migrate
 $ heroku run python manage.py syncdb
@@ -35,7 +35,7 @@ $ heroku run python manage.py syncdb
 
 Once you've deployed, you can easily clone the app and make modifications:
 
-```
+```sh
 $ heroku clone -a new-app-name
 ...
 $ vim templates/login.html
@@ -49,7 +49,7 @@ $ git push heroku master
 
 Install [Python](https://www.python.org/) 2.7.9 locally, and create and activate a virutalenv using the `create_venv.sh` shell script:
 
-```
+```sh
 brew install python
 pip install virtualenv
 ./create_venv.sh
@@ -60,34 +60,36 @@ You must use the [twelve-factor approved method](https://devcenter.heroku.com/ar
 
 As an example, if you want the Django, vanilla [sqlite](https://sqlite.org/) setup, set the `DATABASE_URL` environment variable before doing anything with `manage.py`:
 
-```
+```sh
 export DATABASE_URL=sqlite:///$(pwd)/db.sqlite3
 ```
 
 an sqlite backend can also be run in memory:
 
-```
+```sh
 export DATABASE_URL=sqlite://:memory:
 ```
 
 Use [`honcho`](https://honcho.readthedocs.org/en/latest/) to start the application with [gunicorn](http://gunicorn.org), pretty much like Heroku does:
 
-```
-cat>>.env<<EOF
+```sh
+cat>>.env<<-EOF
 DATABASE_URL="sqlite:///$(pwd)/db.sqlite3"
-SECRET_KEY="$(./.make_secret.py)
+SECRET_KEY="$(./.make_secret.py)"
+PYFITNESSPAL_USERNAME="demo"
+PYFITNESSPAL_PASSWORD="Passw0rd!"
 EOF
 .venv/bin/honcho start
 ```
 
-Immediately after the initial start, you must run the migration to set up your new database.
+You must initialize your database either immediately after, or right before, running the app, using the `migrate` command:
 
-```
+```sh
 ./.venv/bin/python manage.py migrate
 ```
 
 Set up an initial administrator account with the `syncdb` command:
 
-```
+```sh
 ./.venv/bin/python manage.py syncdb
 ```
