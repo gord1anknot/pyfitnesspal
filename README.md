@@ -25,24 +25,39 @@ You can deploy directly to Heroku with the button below.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-After deploying, run the Django `migrate` command to initialize your postgres database, and run the Django `syncdb` command to set up the root administrator account:
+The one-click deploy will automatically:
+
+- Initialize the database
+- Create a single user specified by you
+
+### Manual Setps
+
+After deploying, run the Django `migrate` command to initialize your postgres database:
 
 ```sh
-$ heroku clone -a new-app-name
-$ heroku run python manage.py migrate
-$ heroku run python manage.py syncdb
+heroku clone -a new-app-name
+heroku run python manage.py migrate
+```
+
+Then, create your login credentials like this:
+
+```sh
+heroku run python manage.py create_user my_awesome_username supersecretpassword
+```
+
+Run the Django `syncdb` command to set up the root administrator account:
+
+```sh
+heroku run python manage.py syncdb
 ```
 
 Once you've deployed, you can easily clone the app and make modifications:
 
 ```sh
-$ heroku clone -a new-app-name
-...
-$ vim templates/login.html
-$ git add .
-$ git commit -m "updating login view"
-$ git push heroku master
-...
+vim templates/login.html
+git add .
+git commit -m "updating login view"
+git push heroku master
 ```
 
 ## Running Locally
@@ -53,7 +68,6 @@ Install [Python](https://www.python.org/) 2.7.9 locally, and create and activate
 brew install python
 pip install virtualenv
 ./create_venv.sh
-. .venv/bin/activate
 ```
 
 You must use the [twelve-factor approved method](https://devcenter.heroku.com/articles/getting-started-with-django#django-settings) to specify your database connection url.
@@ -79,14 +93,12 @@ SECRET_KEY="$(./.make_secret.py)"
 PYFITNESSPAL_USERNAME="demo"
 PYFITNESSPAL_PASSWORD="Passw0rd!"
 EOF
+./.venv/bin/python manage.py migrate
+./.venv/bin/python manage.py create_user
 .venv/bin/honcho start
 ```
 
-You must initialize your database either immediately after, or right before, running the app, using the `migrate` command:
-
-```sh
-./.venv/bin/python manage.py migrate
-```
+### Management
 
 Set up an initial administrator account with the `syncdb` command:
 
