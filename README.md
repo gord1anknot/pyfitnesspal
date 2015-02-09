@@ -4,7 +4,7 @@
 
 ## Motivation
 
-MyFitnessPal makes it very easy to enter data, with a very large database and multiple apps (web, iOS, Android). However, it's not so easy to get reports or data out of it. There's only one [highcharts](.make_secret.py) based line graph, and no click-to-export anywhere.
+MyFitnessPal makes it very easy to enter data, with a very large database and multiple apps (web, iOS, Android). However, it's not so easy to get reports or data out of it. There's only one [highcharts](http://www.highcharts.com/) based line graph, and no click-to-export anywhere.
 
 PyFitnessPal doesn't have the features for input or sharing of data with other users, but is _planned_ to be more extensible in the data importing, reporting and exporting departments.
 
