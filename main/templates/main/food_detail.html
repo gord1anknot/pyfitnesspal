@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+Food Detail: {{ object.name }}
+{% endblock title %}
+
+{% block content %}
+    <div class="well col-md-6">
+        <p>{{object}}: {{object.calories}} kCal</p>
+        <a href="{{ object.get_absolute_url }}edit">edit</a>
+    </div>
+{% endblock content %}

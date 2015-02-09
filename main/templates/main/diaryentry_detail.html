@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+Diary Detail: {{ object.date }}
+{% endblock title %}
+
+{% block content %}
+    <div class="well col-md-6">
+        <p>{{object}}</p> <a href="{{ object.get_absolute_url }}edit">edit</a>
+    </div>
+{% endblock content %}

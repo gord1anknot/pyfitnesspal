@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+Diary for Today
+{% endblock title %}
+
+{% block content %}
+<div class="well col-md-6">
+    <p>Enter today's food here</p>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <button type="submit">Done</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block inline_javascript %}
+<script>
+$(document).ready(function() {
+    $('.dateinput').datepicker({
+      format: "yyyy-mm-dd",
+      autoclose: true,
+      todayBtn: true,
+      todayHighlight: true,
+    });
+});
+</script>
+{% endblock %}

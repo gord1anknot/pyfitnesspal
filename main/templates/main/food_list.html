@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Food Database
+{% endblock title %}
+
+{% block content %}
+    <div class="well col-md-6">
+      <p>Foods:</p>
+      {% for food in object_list %}
+      <a href="{% url 'pyfitnesspal_food_detail' pk=food.id %}">{{ food.name }}: {{ food.calories }} kCal</a>
+      {% endfor %}
+    </div>
+{% endblock content %}

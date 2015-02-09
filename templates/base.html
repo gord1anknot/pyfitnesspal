@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}PyFitnessPal{% endblock title %}</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <!-- Datpicker for Bootstrap3 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.1/css/datepicker3.css">
+</head>
+<body>
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'pyfitnesspal_home' %}">PyFitnessPal</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'pyfitnesspal_diary_list_all' %}">View Diary Entries</a></li> 
+    </ul>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'pyfitnesspal_diary_create' %}">New Diary Entry</a></li> 
+    </ul>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'pyfitnesspal_food_list_all' %}">View Foods</a></li> 
+    </ul>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'pyfitnesspal_food_create' %}">New Food</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">About</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'pyfitnesspal_logout' %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% url 'pyfitnesspal_login' %}">Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+<div class="container">
+
+  {% block content %}
+  {% endblock content %}
+
+</div>
+{% block javascript %}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.1/js/bootstrap-datepicker.min.js"></script>
+{% endblock %}
+{% block inline_javascript %}
+{% endblock %}
+</body>
+</html>

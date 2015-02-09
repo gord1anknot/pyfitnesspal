@@ -1,0 +1,24 @@
+{
+  "name": "PyFitnessPal",
+  "description": "Food diary with statistics - budget your nutrition!",
+  "repository": "https://gord1anknot.github.io/pyfitnesspal",
+  "keywords": ["python", "django", "journal", "diary", "nutrition", "fitness"],
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-python",
+    "WEB_CONCURRENCY": {
+      "description": "The number of processes to run.",
+      "value": "2"
+    },
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "DJANGO_ENV": {
+      "description": "Set to production to enable security features.",
+      "value": "production"
+    }
+  },
+  "scripts": {
+    "postdeploy": "python manage.py migrate"
+  }
+}
