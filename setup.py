@@ -17,7 +17,7 @@ from setuptools import setup, find_packages
 setup(
     name="pyfitnesspal",
     description="Food diary with statistics - budget your nutrition!",
-    version='0.1.0',
+    version='0.1.1',
     author="Brad Rowe",
     author_email="rowebradleyj@gmail.com",
     url="https://gord1anknot.github.io/pyfitnesspal",
