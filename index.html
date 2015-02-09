@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640">
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>PyFitnessPal by gord1anknot</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/gord1anknot/pyfitnesspal">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>PyFitnessPal</h1>
+            <h2>simple django clone of www.myfitnesspal.com</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/gord1anknot/pyfitnesspal/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/gord1anknot/pyfitnesspal/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a id="pyfitnesspal" class="anchor" href="#pyfitnesspal" aria-hidden="true"><span class="octicon octicon-link"></span></a>PyFitnessPal</h1>
+
+<p><em>a simple <a href="http://www.myfitnesspal.com/">myfitnesspal</a> clone made with <a href="https://www.djangoproject.com/">django</a></em></p>
+
+<h2>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
+
+<p>MyFitnessPal makes it very easy to enter data, with a very large database and multiple apps (web, iOS, Android). However, it's not so easy to get reports or data out of it. There's only one <a href="http://www.highcharts.com/">highcharts</a> based line graph, and no click-to-export anywhere.</p>
+
+<p>PyFitnessPal doesn't have the features for input or sharing of data with other users, but is <em>planned</em> to be more extensible in the data importing, reporting and exporting departments.</p>
+
+<p>Features To Add:</p>
+
+<ul>
+<li><del>CRUD Food Item</del></li>
+<li><del>CRUD Daily Log Item</del></li>
+<li>Report</li>
+<li>CRUD Users</li>
+<li>CRUD per-user Daily Log Item</li>
+<li>Tests</li>
+<li>CI</li>
+<li>Heroku Deploy Button</li>
+</ul>
+
+<h2>
+<a id="deploy-on-heroku" class="anchor" href="#deploy-on-heroku" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploy on Heroku</h2>
+
+<p>You can deploy directly to Heroku with the button below.</p>
+
+<p><a href="https://heroku.com/deploy"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy"></a></p>
+
+<p>The one-click deploy will automatically:</p>
+
+<ul>
+<li>Initialize the database</li>
+<li>Create a single user specified by you</li>
+</ul>
+
+<h3>
+<a id="manual-setps" class="anchor" href="#manual-setps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manual Setps</h3>
+
+<p>After deploying, run the Django <code>migrate</code> command to initialize your postgres database:</p>
+
+<div class="highlight highlight-sh"><pre>heroku clone -a new-app-name
+heroku run python manage.py migrate</pre></div>
+
+<p>Then, create your login credentials like this:</p>
+
+<div class="highlight highlight-sh"><pre>heroku run python manage.py create_user my_awesome_username supersecretpassword</pre></div>
+
+<p>Run the Django <code>syncdb</code> command to set up the root administrator account:</p>
+
+<div class="highlight highlight-sh"><pre>heroku run python manage.py syncdb</pre></div>
+
+<p>Once you've deployed, you can easily clone the app and make modifications:</p>
+
+<div class="highlight highlight-sh"><pre>vim templates/login.html
+git add <span class="pl-s3">.</span>
+git commit -m <span class="pl-s1"><span class="pl-pds">"</span>updating login view<span class="pl-pds">"</span></span>
+git push heroku master</pre></div>
+
+<h2>
+<a id="running-locally" class="anchor" href="#running-locally" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running Locally</h2>
+
+<p>Install <a href="https://www.python.org/">Python</a> 2.7.9 locally, and create and activate a virutalenv using the <code>create_venv.sh</code> shell script:</p>
+
+<div class="highlight highlight-sh"><pre>brew install python
+pip install virtualenv
+./create_venv.sh</pre></div>
+
+<p>You must use the <a href="https://devcenter.heroku.com/articles/getting-started-with-django#django-settings">twelve-factor approved method</a> to specify your database connection url.</p>
+
+<p>As an example, if you want the Django, vanilla <a href="https://sqlite.org/">sqlite</a> setup, set the <code>DATABASE_URL</code> environment variable before doing anything with <code>manage.py</code>:</p>
+
+<div class="highlight highlight-sh"><pre><span class="pl-s">export</span> DATABASE_URL=sqlite:///<span class="pl-s1"><span class="pl-pds">$(</span><span class="pl-s3">pwd</span><span class="pl-pds">)</span></span>/db.sqlite3</pre></div>
+
+<p>an sqlite backend can also be run in memory:</p>
+
+<div class="highlight highlight-sh"><pre><span class="pl-s">export</span> DATABASE_URL=sqlite://:memory:</pre></div>
+
+<p>Use <a href="https://honcho.readthedocs.org/en/latest/"><code>honcho</code></a> to start the application with <a href="http://gunicorn.org">gunicorn</a>, pretty much like Heroku does:</p>
+
+<div class="highlight highlight-sh"><pre>cat<span class="pl-k">&gt;&gt;</span>.env<span class="pl-s1"><span class="pl-k">&lt;&lt;</span>-<span class="pl-k">EOF</span></span>
+<span class="pl-s1">DATABASE_URL="sqlite:///$(pwd)/db.sqlite3"</span>
+<span class="pl-s1">SECRET_KEY="$(./.make_secret.py)"</span>
+<span class="pl-s1">PYFITNESSPAL_USERNAME="demo"</span>
+<span class="pl-s1">PYFITNESSPAL_PASSWORD="Passw0rd!"</span>
+<span class="pl-s1"><span class="pl-k">EOF</span></span>
+./.venv/bin/python manage.py migrate
+./.venv/bin/python manage.py create_user
+.venv/bin/honcho start</pre></div>
+
+<h3>
+<a id="management" class="anchor" href="#management" aria-hidden="true"><span class="octicon octicon-link"></span></a>Management</h3>
+
+<p>Set up an initial administrator account with the <code>syncdb</code> command:</p>
+
+<div class="highlight highlight-sh"><pre>./.venv/bin/python manage.py syncdb</pre></div>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/gord1anknot">gord1anknot</a> can be found on <a href="https://github.com/gord1anknot/pyfitnesspal">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
